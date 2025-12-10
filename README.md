@@ -70,7 +70,8 @@ int main() {
 ```
 
 # OUTPUT
-<img width="805" height="520" alt="image" src="https://github.com/user-attachments/assets/8feeb160-3dde-403c-b104-124210160f8a" />
+<img width="462" height="253" alt="image" src="https://github.com/user-attachments/assets/0cda8107-54f4-496a-85f9-6390111008b2" />
+
 
 
 # RESULT
