@@ -24,32 +24,27 @@ STEP-5: Read the characters row wise or column wise in the former order to get t
 #include <string.h>
 
 void encryptRailFence(char text[], int key) {
-    char rail[key][strlen(text)];
-    int i, j;
+    int len = strlen(text);
+    char rail[key][len];
 
-    // Fill the rail matrix with '\n' (placeholder)
-    for (i = 0; i < key; i++)
-        for (j = 0; j < strlen(text); j++)
+    // Fill with placeholder
+    for (int i = 0; i < key; i++)
+        for (int j = 0; j < len; j++)
             rail[i][j] = '\n';
 
-    int dir_down = 0;
-    i = 0; // current row
+    int dir_down = 0, row = 0;
 
-    for (j = 0; j < strlen(text); j++) {
-        // Change direction at the top or bottom rail
-        if (i == 0 || i == key - 1)
+    for (int col = 0; col < len; col++) {
+        if (row == 0 || row == key - 1)
             dir_down = !dir_down;
 
-        rail[i][j] = text[j];
-
-        // Move diagonally
-        i += dir_down ? 1 : -1;
+        rail[row][col] = text[col];
+        row += dir_down ? 1 : -1;
     }
 
-    // Construct ciphertext by reading row-wise
     printf("\nCiphertext: ");
-    for (i = 0; i < key; i++)
-        for (j = 0; j < strlen(text); j++)
+    for (int i = 0; i < key; i++)
+        for (int j = 0; j < len; j++)
             if (rail[i][j] != '\n')
                 printf("%c", rail[i][j]);
 }
@@ -59,7 +54,10 @@ int main() {
     int key;
 
     printf("Enter the plaintext: ");
-    gets(text);
+    fgets(text, sizeof(text), stdin);
+
+    // Remove newline
+    text[strcspn(text, "\n")] = '\0';
 
     printf("Enter number of rails: ");
     scanf("%d", &key);
